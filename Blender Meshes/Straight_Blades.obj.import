@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bwxb86bihsqjq"
+path="res://.godot/imported/Straight_Blades.obj-231b2aa048ac76fca3881b7040007790.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Straight_Blades.obj-231b2aa048ac76fca3881b7040007790.mesh"]
+
+source_file="res://Blender Meshes/Straight_Blades.obj"
+dest_files=["res://.godot/imported/Straight_Blades.obj-231b2aa048ac76fca3881b7040007790.mesh", "res://.godot/imported/Straight_Blades.obj-231b2aa048ac76fca3881b7040007790.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,454 @@
+[gd_scene load_steps=52 format=3 uid="uid://blcbn4a6rqsfe"]
+
+[ext_resource type="Script" path="res://Scripts/Sun_Pivot.gd" id="1_bqql7"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="2_pdq8u"]
+[ext_resource type="Script" path="res://Scripts/camera_pivot.gd" id="2_yv5oa"]
+[ext_resource type="Shader" path="res://Shaders/wind_grass.gdshader" id="3_21op0"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="3_pxbow"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="3_sqlkg"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="4_gvvn0"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_1tgmp"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="6_iscxu"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="7_xrn54"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="8_dcyff"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="9_omymh"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="9_qtcqs"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="13_t81y3"]
+[ext_resource type="ArrayMesh" uid="uid://cl453bi53ps7u" path="res://Blender Meshes/Pillar2.obj" id="14_tum05"]
+[ext_resource type="ArrayMesh" uid="uid://dm8avu5aai3tc" path="res://Column.obj" id="15_img4r"]
+[ext_resource type="Material" uid="uid://ctyulgucfgnfp" path="res://Shaders/Columns.tres" id="16_vgis7"]
+[ext_resource type="ArrayMesh" uid="uid://w6p133jge03u" path="res://Blender Meshes/Well.obj" id="17_03vwl"]
+[ext_resource type="ArrayMesh" uid="uid://b11o8o36ikr0k" path="res://Blender Meshes/Big_Slab.obj" id="18_1kbt7"]
+[ext_resource type="ArrayMesh" uid="uid://xfgwv3opkyj4" path="res://Blender Meshes/Meduim_Slab.obj" id="19_q7xwo"]
+[ext_resource type="ArrayMesh" uid="uid://v5hxyk8bftmv" path="res://Blender Meshes/Fucked_Slab.obj" id="20_32n0m"]
+[ext_resource type="ArrayMesh" uid="uid://f66d8w611ovu" path="res://Blender Meshes/Rock2.obj" id="21_gw4vj"]
+[ext_resource type="ArrayMesh" uid="uid://cyekn34tq5ndk" path="res://Blender Meshes/ICO.obj" id="22_guvf3"]
+[ext_resource type="Shader" path="res://PixelArt.gdshader" id="23_pytq3"]
+[ext_resource type="Script" path="res://Control.gd" id="24_3mt34"]
+
+[sub_resource type="Gradient" id="Gradient_yvs28"]
+colors = PackedColorArray(0.117647, 0.121569, 0.317647, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0v6du"]
+gradient = SubResource("Gradient_yvs28")
+fill_from = Vector2(1, 0.136752)
+fill_to = Vector2(1, 0.641026)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_vfhav"]
+night_sky = SubResource("GradientTexture2D_0v6du")
+
+[sub_resource type="Sky" id="Sky_ju840"]
+sky_material = SubResource("PhysicalSkyMaterial_vfhav")
+
+[sub_resource type="Environment" id="Environment_2rvhx"]
+background_mode = 2
+sky = SubResource("Sky_ju840")
+sky_rotation = Vector3(0, 1.13446, 0)
+ambient_light_color = Color(0.396078, 0.52549, 0.745098, 1)
+ambient_light_sky_contribution = 0.85
+tonemap_mode = 3
+tonemap_white = 1.2
+fog_enabled = true
+fog_light_color = Color(0.152941, 0.47451, 0.901961, 1)
+fog_light_energy = 0.39
+fog_density = 0.02
+fog_sky_affect = 0.05
+fog_height = 4.0
+fog_height_density = 0.02
+volumetric_fog_temporal_reprojection_enabled = false
+adjustment_enabled = true
+adjustment_contrast = 1.15
+adjustment_saturation = 1.1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jnyws"]
+frequency = 0.007
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oxdvq"]
+seamless = true
+noise = SubResource("FastNoiseLite_jnyws")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a78v6"]
+render_priority = 0
+shader = ExtResource("3_21op0")
+shader_parameter/cel_toggle = true
+shader_parameter/smooth_color = true
+shader_parameter/if_ground = true
+shader_parameter/grass_color = Color(0.619608, 0.831373, 0.337255, 1)
+shader_parameter/grass_color2 = Color(0.443137, 0.913725, 0.345098, 1)
+shader_parameter/grass_color3 = Color(0.329412, 0.772549, 0.368627, 1)
+shader_parameter/overlay_color = Color(0.675, 0.83, 0.4, 1)
+shader_parameter/billboard = false
+shader_parameter/wind_speed = 0.06
+shader_parameter/wind_strength = 0.4
+shader_parameter/wind_texture_tile_size = 40.0
+shader_parameter/wind_vertical_strength = 0.2
+shader_parameter/wind_horizontal_direction = Vector2(1, 0.5)
+shader_parameter/character_position = null
+shader_parameter/character_radius = 3.0
+shader_parameter/character_push_strength = 1.0
+shader_parameter/color_noise = SubResource("NoiseTexture2D_oxdvq")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mbvds"]
+material = SubResource("ShaderMaterial_a78v6")
+size = Vector2(50, 50)
+subdivide_width = 4000
+subdivide_depth = 1000
+
+[sub_resource type="GDScript" id="GDScript_jtedc"]
+
+[sub_resource type="Resource" id="Resource_t4v0w"]
+script = ExtResource("4_gvvn0")
+amount = 80000
+enabled = true
+override_global_seed = true
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_1hq5a"]
+script = ExtResource("5_1tgmp")
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 90, 0)
+scale = Vector3(0.1, 0.9, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_qmgff"]
+script = ExtResource("6_iscxu")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_e72nj"]
+script = ExtResource("7_xrn54")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_vm23q"]
+script = ExtResource("3_pxbow")
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_t4v0w"), SubResource("Resource_1hq5a"), SubResource("Resource_qmgff"), SubResource("Resource_e72nj")])
+
+[sub_resource type="Resource" id="Resource_6bdn0"]
+script = ExtResource("9_qtcqs")
+size = Vector3(1, 1, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_3a20g"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.00222837, -1.93249e-08, -0.049688, 0, 0, 0, 0, 0, 0, 0.0303662, -1.93249e-08, -0.0360641, 0, 0, 0, 0, 0, 0, 0.0463025, -1.93249e-08, -0.00368609, 0, 0, 0, 0, 0, 0, 0.0356069, -1.93249e-08, 0.0263089, 0, 0, 0, 0, 0, 0, 0.00283525, -1.93249e-08, 0.042567, 0, 0, 0, 0, 0, 0, -0.0305614, -1.93249e-08, 0.0311576, 0, 0, 0, 0, 0, 0, -0.0458179, -1.93249e-08, -8.71769e-05, 0, 0, 0, 0, 0, 0, -0.0351234, -1.93249e-08, -0.0342493, 0, 0, 0, 0, 0, 0, -0.0045064, -1.93249e-08, -0.0499851),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="Resource" id="Resource_rvcif"]
+script = ExtResource("13_t81y3")
+closed = true
+thickness = 0.0
+curve = SubResource("Curve3D_3a20g")
+
+[sub_resource type="Curve3D" id="Curve3D_wjxeu"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.00609847, -4.02797e-08, -0.0393829, 0, 0, 0, 0, 0, 0, 0.0638938, -4.02797e-08, -0.037769, 0, 0, 0, 0, 0, 0, 0.0500667, -4.02797e-08, 0.0133635, 0, 0, 0, 0, 0, 0, -0.00847132, -4.02797e-08, -0.00216133, 0, 0, 0, 0, 0, 0, -0.0718043, -4.02797e-08, 0.00421074, 0, 0, 0, 0, 0, 0, -0.0630822, -2.37022e-07, -0.0426285, 0, 0, 0, 0, 0, 0, -0.0328197, 8.84756e-09, -0.0297891),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="Resource" id="Resource_xpjyo"]
+script = ExtResource("13_t81y3")
+closed = true
+thickness = 0.0
+curve = SubResource("Curve3D_wjxeu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5aria"]
+emission_enabled = true
+emission = Color(0.0470588, 0.0470588, 0.0470588, 1)
+emission_energy_multiplier = 737.21
+
+[sub_resource type="Animation" id="Animation_f550i"]
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.75]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lighting/Sun_Pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lighting/WorldEnvironment:environment:ambient_light_sky_contribution")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.85]
+}
+
+[sub_resource type="Animation" id="Animation_rocya"]
+resource_name = "Sun_Cycle"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 7.5, 22.5, 25.5, 30),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.65, 0.65, 0.0, 0.0, 0.65, 0.65]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lighting/Sun_Pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -6.28319)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lighting/WorldEnvironment:environment:ambient_light_sky_contribution")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(7.5, 15, 22.5, 30),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.85, 0.85, 0.85, 0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_as3nl"]
+_data = {
+"RESET": SubResource("Animation_f550i"),
+"Sun_Cycle": SubResource("Animation_rocya")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1g8e"]
+shader = ExtResource("23_pytq3")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xlp4f"]
+viewport_path = NodePath("Lighting/SubViewport")
+
+[node name="Main" type="Node3D"]
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_2rvhx")
+
+[node name="Sun_Pivot" type="Node3D" parent="Lighting"]
+script = ExtResource("1_bqql7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting/Sun_Pivot"]
+transform = Transform3D(-4.37114e-08, 1, 0, -0.707107, -3.09086e-08, 0.707107, 0.707107, 3.09086e-08, 0.707107, 0.279141, 3.98484, -1.83153)
+light_color = Color(0.941176, 1, 0.882353, 1)
+light_energy = 0.75
+shadow_enabled = true
+shadow_blur = 5.0
+
+[node name="Pivot" type="Node3D" parent="Lighting" node_paths=PackedStringArray("camera")]
+script = ExtResource("2_yv5oa")
+camera = NodePath("../SubViewport/Camera3D")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Lighting/Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+remote_path = NodePath("../../SubViewport/Camera3D")
+
+[node name="SubViewport" type="SubViewport" parent="Lighting"]
+size = Vector2i(960, 542)
+
+[node name="Camera3D" type="Camera3D" parent="Lighting/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+projection = 1
+size = 10.0
+near = 0.001
+far = 40.0
+script = ExtResource("3_sqlkg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77233, 0)
+visible = false
+light_color = Color(0.585562, 0.895168, 0.975883, 1)
+light_specular = 0.0
+shadow_enabled = true
+
+[node name="Exclude" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Exclude"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0184312, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_mbvds")
+skeleton = NodePath("../..")
+script = SubResource("GDScript_jtedc")
+
+[node name="ProtonScatter" type="Node3D" parent="Exclude/Ground"]
+script = ExtResource("2_pdq8u")
+modifier_stack = SubResource("Resource_vm23q")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="ScatterItem" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+script = ExtResource("8_dcyff")
+override_cast_shadow = 0
+path = "res://grass_3.tscn"
+
+[node name="ScatterShape" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+transform = Transform3D(50, 0, -1.49011e-06, 0, 2.425, 0, 1.49011e-06, 0, 50, 0, 0, 0)
+script = ExtResource("9_omymh")
+shape = SubResource("Resource_6bdn0")
+
+[node name="ScatterShape2" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+transform = Transform3D(40.0998, 0, -20.306, 0, 2.18, 0, 20.306, 0, 40.0998, -0.0456105, -0.0224714, 0.130228)
+script = ExtResource("9_omymh")
+negative = true
+shape = SubResource("Resource_rvcif")
+
+[node name="ScatterShape3" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+transform = Transform3D(50, 0, -1.49011e-06, 0, 2.425, 0, 1.49011e-06, 0, 50, -4.97321, 0.0154159, 0.594634)
+script = ExtResource("9_omymh")
+negative = true
+shape = SubResource("Resource_xpjyo")
+
+[node name="Meshes" type="Node3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.707107, 0, 0.707107, -0.202379, 0.958168, 0.202379, -0.677527, -0.286207, 0.677527, 5.69655, -1.89236, -6.17501)
+mesh = ExtResource("14_tum05")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("16_vgis7")
+
+[node name="4" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("14_tum05")
+skeleton = NodePath("../..")
+
+[node name="5" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(-0.252815, -2.5771, 0.233808, 1.29507e-07, -0.234922, -2.58937, 2.58768, -0.251782, 0.0228425, -0.809909, 1.127, -5.73088)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("15_img4r")
+
+[node name="3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 8)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("14_tum05")
+
+[node name="Another Pillar" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1.83848, 0, 1.83848, 0, 2.6, 0, -1.83848, 0, 1.83848, 7.02447, -1.19209e-06, 5.02463)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("15_img4r")
+
+[node name="Well" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1.441, 0, 0, 0, 1.935, 0, 0, 0, 1.441, 0, 0.103632, 0)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("17_03vwl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.965654, 0, -0.25983, 0, 1, 0, 0.25983, 0, 0.965654, -13.7984, 0.123142, -1.61964)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("18_1kbt7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.976251, 0, 0.216644, 0, 1, 0, -0.216644, 0, 0.976251, -23.5392, 0.121907, 4.1762)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("19_q7xwo")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.79, 0, 0, 0, 1, 0, 0, 0, 0.79, -30.8488, 0.109624, -1.27007)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("20_32n0m")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86816, 0, 10.1622)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("21_gw4vj")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.696641, 0, -0.801515, 0, 1.735, 0, 0.933765, 0, 0.597975, -3.0745, 0.258945, -0.324094)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("21_gw4vj")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27463, 0)
+visible = false
+mesh = ExtResource("22_guvf3")
+surface_material_override/0 = SubResource("StandardMaterial3D_5aria")
+
+[node name="Animations" type="Node3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+root_node = NodePath("../..")
+autoplay = "Sun_Cycle"
+libraries = {
+"": SubResource("AnimationLibrary_as3nl")
+}
+
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("24_3mt34")
+viewport = NodePath("../Lighting/SubViewport")
+sub_pixel_movement = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Display" type="Sprite2D" parent="UI"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_m1g8e")
+texture = SubResource("ViewportTexture_xlp4f")
+centered = false

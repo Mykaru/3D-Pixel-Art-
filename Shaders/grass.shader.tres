@@ -1,0 +1,64 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://baijh77oexmwe"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_erx43"]
+expanded_output_ports = [0]
+constant = Color(0.381053, 0.574219, 0.163742, 1)
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_8xe4g"]
+expanded_output_ports = [0]
+constant = Color(0.108857, 0.42177, 0.148212, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_0ryhi"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 1), 2, Vector2(0.5, 0.5)]
+op_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_k3ryg"]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_5hrk8"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, vertex_lighting;
+
+uniform sampler2D tex_frg_5;
+
+
+
+void fragment() {
+// ColorConstant:2
+	vec4 n_out2p0 = vec4(0.381053, 0.574219, 0.163742, 1.000000);
+
+
+// ColorConstant:3
+	vec4 n_out3p0 = vec4(0.108857, 0.421770, 0.148212, 1.000000);
+
+
+// Texture2D:5
+	vec4 n_out5p0 = texture(tex_frg_5, UV);
+
+
+// Mix:6
+	vec3 n_out6p0 = mix(vec3(n_out2p0.xyz), vec3(n_out3p0.xyz), vec3(n_out5p0.xyz));
+
+
+// Output:0
+	ALBEDO = n_out6p0;
+
+
+}
+"
+modes/cull = 2
+flags/vertex_lighting = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_erx43")
+nodes/fragment/2/position = Vector2(-240, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_8xe4g")
+nodes/fragment/3/position = Vector2(-240, 340)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_0ryhi")
+nodes/fragment/4/position = Vector2(140, 160)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_k3ryg")
+nodes/fragment/5/position = Vector2(-160, 500)
+nodes/fragment/6/node = SubResource("VisualShaderNodeMix_5hrk8")
+nodes/fragment/6/position = Vector2(140, 340)
+nodes/fragment/connections = PackedInt32Array(5, 0, 6, 2, 3, 0, 6, 1, 2, 0, 6, 0, 6, 0, 0, 0)

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://coj00av1y4q5h"
+path="res://.godot/imported/bill_grass_newshape.obj-0710d449c6cb8d80bbeddc5d776f1b77.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bill_grass_newshape.obj-0710d449c6cb8d80bbeddc5d776f1b77.mesh"]
+
+source_file="res://Blender Meshes/bill_grass_newshape.obj"
+dest_files=["res://.godot/imported/bill_grass_newshape.obj-0710d449c6cb8d80bbeddc5d776f1b77.mesh", "res://.godot/imported/bill_grass_newshape.obj-0710d449c6cb8d80bbeddc5d776f1b77.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

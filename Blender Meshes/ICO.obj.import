@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cyekn34tq5ndk"
+path="res://.godot/imported/ICO.obj-c6145eb47f82e817ea4a9d7dc3d6ae6e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ICO.obj-c6145eb47f82e817ea4a9d7dc3d6ae6e.mesh"]
+
+source_file="res://Blender Meshes/ICO.obj"
+dest_files=["res://.godot/imported/ICO.obj-c6145eb47f82e817ea4a9d7dc3d6ae6e.mesh", "res://.godot/imported/ICO.obj-c6145eb47f82e817ea4a9d7dc3d6ae6e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

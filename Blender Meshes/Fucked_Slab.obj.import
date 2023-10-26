@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://v5hxyk8bftmv"
+path="res://.godot/imported/Fucked_Slab.obj-4bee4a3d3828d48b18b6ac3b6f2f2355.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Fucked_Slab.obj-4bee4a3d3828d48b18b6ac3b6f2f2355.mesh"]
+
+source_file="res://Blender Meshes/Fucked_Slab.obj"
+dest_files=["res://.godot/imported/Fucked_Slab.obj-4bee4a3d3828d48b18b6ac3b6f2f2355.mesh", "res://.godot/imported/Fucked_Slab.obj-4bee4a3d3828d48b18b6ac3b6f2f2355.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://di0odt1g8du5t"
+path="res://.godot/imported/bill_grass_newnormals.obj-0eafa3427dfea2a1bed29441798eade2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bill_grass_newnormals.obj-0eafa3427dfea2a1bed29441798eade2.mesh"]
+
+source_file="res://Blender Meshes/bill_grass_newnormals.obj"
+dest_files=["res://.godot/imported/bill_grass_newnormals.obj-0eafa3427dfea2a1bed29441798eade2.mesh", "res://.godot/imported/bill_grass_newnormals.obj-0eafa3427dfea2a1bed29441798eade2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://pqbdtfep8m0e"]
+
+[ext_resource type="Shader" path="res://Shaders/wind_grass.gdshader" id="2_btihu"]
+[ext_resource type="ArrayMesh" uid="uid://coj00av1y4q5h" path="res://Blender Meshes/bill_grass_newshape.obj" id="2_i1uvx"]
+
+[sub_resource type="GDScript" id="GDScript_b3wxf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ms5r3"]
+frequency = 0.007
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x7hlu"]
+seamless = true
+noise = SubResource("FastNoiseLite_ms5r3")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2n6ho"]
+frequency = 0.007
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l5ma0"]
+seamless = true
+noise = SubResource("FastNoiseLite_2n6ho")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4q4f8"]
+render_priority = 0
+shader = ExtResource("2_btihu")
+shader_parameter/cel_toggle = true
+shader_parameter/smooth_color = true
+shader_parameter/if_ground = false
+shader_parameter/grass_color = Color(0.619608, 0.831373, 0.337255, 1)
+shader_parameter/grass_color2 = Color(0.443137, 0.913725, 0.345098, 1)
+shader_parameter/grass_color3 = Color(0.329412, 0.772549, 0.368627, 1)
+shader_parameter/overlay_color = Color(0.675, 0.83, 0.4, 1)
+shader_parameter/billboard = false
+shader_parameter/wind_speed = 0.06
+shader_parameter/wind_strength = 0.4
+shader_parameter/wind_texture_tile_size = 40.0
+shader_parameter/wind_vertical_strength = 0.2
+shader_parameter/wind_horizontal_direction = Vector2(1, 0.5)
+shader_parameter/character_position = null
+shader_parameter/character_radius = 3.0
+shader_parameter/character_push_strength = 1.0
+shader_parameter/color_noise = SubResource("NoiseTexture2D_x7hlu")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_l5ma0")
+
+[node name="grass_3" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+script = SubResource("GDScript_b3wxf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.75, 0, 0, 0, 8.143, -1.66102e-06, 0, 2.84752e-06, 4.75, 0, 0, 0)
+layers = 2
+material_override = SubResource("ShaderMaterial_4q4f8")
+cast_shadow = 0
+mesh = ExtResource("2_i1uvx")

@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ctyulgucfgnfp"]
+
+[ext_resource type="Shader" path="res://secondpass.gdshader" id="1_gtmi7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owmv4"]
+render_priority = 0
+shader = ExtResource("1_gtmi7")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = true
+shader_parameter/highlight_strength = 1.55
+shader_parameter/shadow_strength = 0.35
+
+[resource]
+next_pass = SubResource("ShaderMaterial_owmv4")
+albedo_color = Color(0.858824, 0.858824, 0.858824, 1)
+metallic = 0.37
+metallic_specular = 0.83
+ao_enabled = true

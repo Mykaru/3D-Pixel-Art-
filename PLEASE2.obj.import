@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dv5batkyheb72"
+path="res://.godot/imported/PLEASE2.obj-9b87eb1b1a374a9c95d181ae2fdf7add.mesh"
+
+[deps]
+
+files=["res://.godot/imported/PLEASE2.obj-9b87eb1b1a374a9c95d181ae2fdf7add.mesh"]
+
+source_file="res://PLEASE2.obj"
+dest_files=["res://.godot/imported/PLEASE2.obj-9b87eb1b1a374a9c95d181ae2fdf7add.mesh", "res://.godot/imported/PLEASE2.obj-9b87eb1b1a374a9c95d181ae2fdf7add.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
