@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d2g7wlcswosvo"
+path="res://.godot/imported/fuck_you.obj-64f7dabc5204e49ef6366194cb907a4a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/fuck_you.obj-64f7dabc5204e49ef6366194cb907a4a.mesh"]
+
+source_file="res://Blender Meshes/fuck_you.obj"
+dest_files=["res://.godot/imported/fuck_you.obj-64f7dabc5204e49ef6366194cb907a4a.mesh", "res://.godot/imported/fuck_you.obj-64f7dabc5204e49ef6366194cb907a4a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

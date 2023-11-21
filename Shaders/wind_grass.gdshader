@@ -1,5 +1,6 @@
 shader_type spatial;
 render_mode cull_disabled;
+
 uniform bool cel_toggle = true;
 uniform bool smooth_color = false;
 uniform bool if_ground = false;
@@ -7,8 +8,11 @@ uniform sampler2D color_noise : source_color;
 uniform vec3 grass_color : source_color;
 uniform vec3 grass_color2 : source_color;
 uniform vec3 grass_color3 : source_color;
-uniform vec3 overlay_color : source_color = vec3(0.675f, 0.83f, 0.4f);
+global uniform vec4 GrassOverlay;
+//uniform vec3 overlay_color : source_color = vec3(0.675f, 0.83f, 0.4f);
 uniform bool billboard;
+uniform bool normal_shit;
+uniform sampler2D alpha_mask; 
 
 uniform float wind_speed = 0.06;
 uniform float wind_strength = 0.4;
@@ -108,11 +112,11 @@ void vertex() {
     if (smooth_color) {
 		float t = smoothstep(cutoff1, cutoff2, noise_value);
 		color = mix(grass_color, mix(grass_color2, grass_color3, t), t*1.1);
-		vec3 final = mix(overlay_color, color, 0.6);
+		vec3 final = mix(GrassOverlay.rgb, color, 0.6);
 		color_variation = final;
 		
 	} else {
-		color = mix(overlay_color, color, 0.5);
+		color = mix(GrassOverlay.rgb, color, 0.5);
 		color_variation = color;
 	}
 
@@ -124,14 +128,27 @@ void vertex() {
 		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
 		MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 	}
+	
 }
+
+
 
 void fragment() {
 	// Use the color variation in the fragment shader
-
     if (!FRONT_FACING) {
         NORMAL = -NORMAL;
     }
 	
+	if (billboard || normal_shit) {
+		NORMAL = vec3(0.0, 0.65, 0.65);
+	}
+	
+	//float alpha = textureLod(alpha_mask, UV, 0.0).r;
+	 //if (alpha < 0.5) {
+        // Discard the current fragment for alpha values below the threshold
+       // discard;
+    //}
+	
 	ALBEDO = color_variation;
+	
 }

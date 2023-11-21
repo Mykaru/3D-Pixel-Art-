@@ -4,6 +4,8 @@ render_mode cull_disabled;
 uniform vec3 color : source_color;
 varying vec3 worldPos;
 
+
+
 void vertex() {
 	worldPos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
@@ -14,4 +16,8 @@ void fragment() {
 	if (!FRONT_FACING) {
 		NORMAL = -NORMAL;
 	}
+	
+
+	
+	VERTEX.xyz = vec3(1.0, 0.3, 1.0).xyz ;
 }

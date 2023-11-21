@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cckvhqx885s2o"
+path="res://.godot/imported/no_backface.obj-eed9dc8b9fb4b5cfe49ca7e51b97546a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/no_backface.obj-eed9dc8b9fb4b5cfe49ca7e51b97546a.mesh"]
+
+source_file="res://Blender Meshes/Tree/no_backface.obj"
+dest_files=["res://.godot/imported/no_backface.obj-eed9dc8b9fb4b5cfe49ca7e51b97546a.mesh", "res://.godot/imported/no_backface.obj-eed9dc8b9fb4b5cfe49ca7e51b97546a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

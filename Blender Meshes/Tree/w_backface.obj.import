@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cm4id7ldi2mie"
+path="res://.godot/imported/w_backface.obj-55cbc547f7674dbb649e714cd5684168.mesh"
+
+[deps]
+
+files=["res://.godot/imported/w_backface.obj-55cbc547f7674dbb649e714cd5684168.mesh"]
+
+source_file="res://Blender Meshes/Tree/w_backface.obj"
+dest_files=["res://.godot/imported/w_backface.obj-55cbc547f7674dbb649e714cd5684168.mesh", "res://.godot/imported/w_backface.obj-55cbc547f7674dbb649e714cd5684168.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://blcbn4a6rqsfe"]
+[gd_scene load_steps=59 format=3 uid="uid://blcbn4a6rqsfe"]
 
 [ext_resource type="Script" path="res://Scripts/Sun_Pivot.gd" id="1_bqql7"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="2_pdq8u"]
@@ -22,9 +22,16 @@
 [ext_resource type="ArrayMesh" uid="uid://xfgwv3opkyj4" path="res://Blender Meshes/Meduim_Slab.obj" id="19_q7xwo"]
 [ext_resource type="ArrayMesh" uid="uid://v5hxyk8bftmv" path="res://Blender Meshes/Fucked_Slab.obj" id="20_32n0m"]
 [ext_resource type="ArrayMesh" uid="uid://f66d8w611ovu" path="res://Blender Meshes/Rock2.obj" id="21_gw4vj"]
+[ext_resource type="ArrayMesh" uid="uid://bwr2sltp4a165" path="res://Blender Meshes/Rocks/Smooth_Rock2.obj" id="22_87vor"]
 [ext_resource type="ArrayMesh" uid="uid://cyekn34tq5ndk" path="res://Blender Meshes/ICO.obj" id="22_guvf3"]
 [ext_resource type="Shader" path="res://PixelArt.gdshader" id="23_pytq3"]
 [ext_resource type="Script" path="res://Control.gd" id="24_3mt34"]
+[ext_resource type="Shader" path="res://secondpass.gdshader" id="24_jg5qs"]
+[ext_resource type="Script" path="res://orb_movement.gd" id="25_ubvgq"]
+[ext_resource type="Script" path="res://time_slider.gd" id="26_46q4t"]
+[ext_resource type="PackedScene" uid="uid://bxbpyv0r0vbf0" path="res://bush_test.tscn" id="27_abei4"]
+[ext_resource type="PackedScene" uid="uid://d3h8mc02nbdgq" path="res://Tree_Test.tscn" id="29_7fj7j"]
+[ext_resource type="Script" path="res://Zoom Slider.gd" id="32_qmrc2"]
 
 [sub_resource type="Gradient" id="Gradient_yvs28"]
 colors = PackedColorArray(0.117647, 0.121569, 0.317647, 1, 0, 0, 0, 1)
@@ -46,12 +53,33 @@ sky = SubResource("Sky_ju840")
 sky_rotation = Vector3(0, 1.13446, 0)
 ambient_light_color = Color(0.396078, 0.52549, 0.745098, 1)
 ambient_light_sky_contribution = 0.85
+ambient_light_energy = 1.5
 tonemap_mode = 3
 tonemap_white = 1.2
+ssao_enabled = true
+ssao_radius = 1.21
+ssao_intensity = 5.29
+ssao_detail = 0.0
+ssao_horizon = 0.56
+ssao_sharpness = 1.0
+ssil_radius = 0.01
+ssil_intensity = 0.0
+ssil_normal_rejection = 0.63
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 0.48
+sdfgi_y_scale = 2
+sdfgi_energy = 0.65
+glow_enabled = true
+glow_levels/1 = 1.25
+glow_normalized = true
+glow_intensity = 2.4
+glow_strength = 0.1
+glow_mix = 0.0
+glow_bloom = 0.76
+glow_blend_mode = 0
 fog_enabled = true
 fog_light_color = Color(0.152941, 0.47451, 0.901961, 1)
-fog_light_energy = 0.39
-fog_density = 0.02
+fog_light_energy = 0.3
 fog_sky_affect = 0.05
 fog_height = 4.0
 fog_height_density = 0.02
@@ -59,6 +87,21 @@ volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
 adjustment_contrast = 1.15
 adjustment_saturation = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyw26"]
+render_priority = 0
+shader = ExtResource("24_jg5qs")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = true
+shader_parameter/highlight_strength = 1.68
+shader_parameter/shadow_strength = 0.92
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5aria"]
+next_pass = SubResource("ShaderMaterial_xyw26")
+albedo_color = Color(0.4, 0.603922, 1, 1)
+emission_enabled = true
+emission = Color(0.4, 0.603922, 1, 1)
+emission_energy_multiplier = 0.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jnyws"]
 frequency = 0.007
@@ -76,8 +119,8 @@ shader_parameter/if_ground = true
 shader_parameter/grass_color = Color(0.619608, 0.831373, 0.337255, 1)
 shader_parameter/grass_color2 = Color(0.443137, 0.913725, 0.345098, 1)
 shader_parameter/grass_color3 = Color(0.329412, 0.772549, 0.368627, 1)
-shader_parameter/overlay_color = Color(0.675, 0.83, 0.4, 1)
 shader_parameter/billboard = false
+shader_parameter/normal_shit = false
 shader_parameter/wind_speed = 0.06
 shader_parameter/wind_strength = 0.4
 shader_parameter/wind_texture_tile_size = 40.0
@@ -94,29 +137,27 @@ size = Vector2(50, 50)
 subdivide_width = 4000
 subdivide_depth = 1000
 
-[sub_resource type="GDScript" id="GDScript_jtedc"]
-
-[sub_resource type="Resource" id="Resource_t4v0w"]
+[sub_resource type="Resource" id="Resource_85dqv"]
 script = ExtResource("4_gvvn0")
-amount = 80000
+amount = 70000
 enabled = true
 override_global_seed = true
 custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_1hq5a"]
+[sub_resource type="Resource" id="Resource_0y7mc"]
 script = ExtResource("5_1tgmp")
 position = Vector3(0, 0, 0)
 rotation = Vector3(0, 90, 0)
-scale = Vector3(0.1, 0.9, 0.1)
+scale = Vector3(0.5, 0.75, 0.5)
 enabled = true
 override_global_seed = false
 custom_seed = 0
 restrict_height = false
-reference_frame = 2
+reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_qmgff"]
+[sub_resource type="Resource" id="Resource_v7fyc"]
 script = ExtResource("6_iscxu")
 iterations = 3
 offset_step = 0.2
@@ -128,7 +169,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_e72nj"]
+[sub_resource type="Resource" id="Resource_yiy7l"]
 script = ExtResource("7_xrn54")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 5.0
@@ -144,9 +185,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_vm23q"]
+[sub_resource type="Resource" id="Resource_6ghqs"]
 script = ExtResource("3_pxbow")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_t4v0w"), SubResource("Resource_1hq5a"), SubResource("Resource_qmgff"), SubResource("Resource_e72nj")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_85dqv"), SubResource("Resource_0y7mc"), SubResource("Resource_v7fyc"), SubResource("Resource_yiy7l")])
 
 [sub_resource type="Resource" id="Resource_6bdn0"]
 script = ExtResource("9_qtcqs")
@@ -165,9 +206,9 @@ closed = true
 thickness = 0.0
 curve = SubResource("Curve3D_3a20g")
 
-[sub_resource type="Curve3D" id="Curve3D_wjxeu"]
+[sub_resource type="Curve3D" id="Curve3D_vcvpj"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.00609847, -4.02797e-08, -0.0393829, 0, 0, 0, 0, 0, 0, 0.0638938, -4.02797e-08, -0.037769, 0, 0, 0, 0, 0, 0, 0.0500667, -4.02797e-08, 0.0133635, 0, 0, 0, 0, 0, 0, -0.00847132, -4.02797e-08, -0.00216133, 0, 0, 0, 0, 0, 0, -0.0718043, -4.02797e-08, 0.00421074, 0, 0, 0, 0, 0, 0, -0.0630822, -2.37022e-07, -0.0426285, 0, 0, 0, 0, 0, 0, -0.0328197, 8.84756e-09, -0.0297891),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.00134265, -3.72529e-09, -0.0460404, 0, 0, 0, 0, 0, 0, 0.0681137, 9.49949e-08, -0.0386352, 0, 0, 0, 0, 0, 0, 0.0574186, 9.49949e-08, 0.0182402, 0, 0, 0, 0, 0, 0, -0.0080663, -1.01514e-07, 0.000498007, 0, 0, 0, 0, 0, 0, -0.0767279, 9.49949e-08, 0.00787757, 0, 0, 0, 0, 0, 0, -0.0668435, 9.49949e-08, -0.0447212, 0, 0, 0, 0, 0, 0, -0.031859, -1.01514e-07, -0.0356344),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 7
@@ -176,51 +217,75 @@ point_count = 7
 script = ExtResource("13_t81y3")
 closed = true
 thickness = 0.0
-curve = SubResource("Curve3D_wjxeu")
+curve = SubResource("Curve3D_vcvpj")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5aria"]
-emission_enabled = true
-emission = Color(0.0470588, 0.0470588, 0.0470588, 1)
-emission_energy_multiplier = 737.21
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1g8e"]
+shader = ExtResource("23_pytq3")
 
-[sub_resource type="Animation" id="Animation_f550i"]
-length = 20.0
-loop_mode = 1
+[sub_resource type="ViewportTexture" id="ViewportTexture_xlp4f"]
+viewport_path = NodePath("Lighting/SubViewport")
+
+[sub_resource type="Animation" id="Animation_4s7wc"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_energy")
+tracks/0/path = NodePath("Lighting/Oscillator/OmniLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.75]
+"values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Lighting/Sun_Pivot:rotation")
+tracks/1/path = NodePath("Lighting/Oscillator/Orb:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 2.13258, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Lighting/WorldEnvironment:environment:ambient_light_sky_contribution")
+tracks/2/path = NodePath("Lighting/Oscillator/OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.85]
+"values": [Vector3(0, 1.3, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lighting/Oscillator/Orb:surface_material_override/0:emission_energy_multiplier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.941176, 1, 0.882353, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_rocya"]
@@ -234,7 +299,7 @@ tracks/0/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3, 7.5, 22.5, 25.5, 30),
+"times": PackedFloat32Array(0, 3, 7.5, 22.5, 27, 30),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.65, 0.65, 0.0, 0.0, 0.65, 0.65]
@@ -258,23 +323,77 @@ tracks/2/path = NodePath("Lighting/WorldEnvironment:environment:ambient_light_sk
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(7.5, 15, 22.5, 30),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(7.5, 15, 22.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.85, 0.85, 0.85, 0.5]
+"values": [0.85, 0.85, 0.85]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lighting/Oscillator/OmniLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 7.5, 9, 21, 22.5, 30),
+"transitions": PackedFloat32Array(1, 0.185, 1, 0.185, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0, 0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lighting/Oscillator/Orb:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(7.5, 9, 21, 22.5),
+"transitions": PackedFloat32Array(0.185, 1, 0.185, 1),
+"update": 0,
+"values": [Vector3(0, 0.8, 0), Vector3(0, 1.55, 0), Vector3(0, 1.55, 0), Vector3(0, 0.8, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Lighting/Oscillator/OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 7.5, 9, 21, 22.5, 30),
+"transitions": PackedFloat32Array(1, 0.185, 1, 0.185, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.8, 0), Vector3(0, 0.8, 0), Vector3(0, 1.55, 0), Vector3(0, 1.55, 0), Vector3(0, 0.8, 0), Vector3(0, 0.8, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Lighting/Oscillator/Orb:surface_material_override/0:emission_energy_multiplier")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 7.5, 9, 21, 22.5, 30),
+"transitions": PackedFloat32Array(1, 0.185, 1, 0.185, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.5, 0.5, 0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(3, 5, 22.5, 27),
+"transitions": PackedFloat32Array(1, 1, 0.277393, 1),
+"update": 0,
+"values": [Color(0.941176, 1, 0.882353, 1), Color(1, 0.803922, 0.423529, 1), Color(1, 0.803922, 0.423529, 1), Color(0.941176, 1, 0.882353, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_as3nl"]
 _data = {
-"RESET": SubResource("Animation_f550i"),
+"RESET": SubResource("Animation_4s7wc"),
 "Sun_Cycle": SubResource("Animation_rocya")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1g8e"]
-shader = ExtResource("23_pytq3")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_xlp4f"]
-viewport_path = NodePath("Lighting/SubViewport")
 
 [node name="Main" type="Node3D"]
 
@@ -284,171 +403,233 @@ viewport_path = NodePath("Lighting/SubViewport")
 environment = SubResource("Environment_2rvhx")
 
 [node name="Sun_Pivot" type="Node3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.38979, 0)
 script = ExtResource("1_bqql7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting/Sun_Pivot"]
 transform = Transform3D(-4.37114e-08, 1, 0, -0.707107, -3.09086e-08, 0.707107, 0.707107, 3.09086e-08, 0.707107, 0.279141, 3.98484, -1.83153)
 light_color = Color(0.941176, 1, 0.882353, 1)
-light_energy = 0.75
+light_energy = 0.65
 shadow_enabled = true
-shadow_blur = 5.0
+shadow_opacity = 0.8
 
 [node name="Pivot" type="Node3D" parent="Lighting" node_paths=PackedStringArray("camera")]
 script = ExtResource("2_yv5oa")
 camera = NodePath("../SubViewport/Camera3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Lighting/Pivot"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14, 14)
 remote_path = NodePath("../../SubViewport/Camera3D")
 
 [node name="SubViewport" type="SubViewport" parent="Lighting"]
-size = Vector2i(960, 542)
+size = Vector2i(770, 434)
 
 [node name="Camera3D" type="Camera3D" parent="Lighting/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14, 14)
 projection = 1
-size = 10.0
+fov = 26.7
+size = 12.0
 near = 0.001
-far = 40.0
+far = 298.36
 script = ExtResource("3_sqlkg")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77233, 0)
-visible = false
+[node name="Oscillator" type="Node3D" parent="Lighting"]
+script = ExtResource("25_ubvgq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lighting/Oscillator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 light_color = Color(0.585562, 0.895168, 0.975883, 1)
+light_energy = 0.0
 light_specular = 0.0
 shadow_enabled = true
 
-[node name="Exclude" type="Node3D" parent="."]
+[node name="Orb" type="MeshInstance3D" parent="Lighting/Oscillator"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 2.13258, 0)
+mesh = ExtResource("22_guvf3")
+skeleton = NodePath("../../../Scene Objects")
+surface_material_override/0 = SubResource("StandardMaterial3D_5aria")
 
-[node name="Ground" type="MeshInstance3D" parent="Exclude"]
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0184312, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_mbvds")
 skeleton = NodePath("../..")
-script = SubResource("GDScript_jtedc")
 
-[node name="ProtonScatter" type="Node3D" parent="Exclude/Ground"]
+[node name="Grass System" type="Node3D" parent="Terrain/Ground"]
 script = ExtResource("2_pdq8u")
-modifier_stack = SubResource("Resource_vm23q")
+modifier_stack = SubResource("Resource_6ghqs")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
-[node name="ScatterItem" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+[node name="ScatterItem" type="Node3D" parent="Terrain/Ground/Grass System"]
 script = ExtResource("8_dcyff")
 override_cast_shadow = 0
 path = "res://grass_3.tscn"
 
-[node name="ScatterShape" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+[node name="ScatterShape" type="Node3D" parent="Terrain/Ground/Grass System"]
 transform = Transform3D(50, 0, -1.49011e-06, 0, 2.425, 0, 1.49011e-06, 0, 50, 0, 0, 0)
 script = ExtResource("9_omymh")
 shape = SubResource("Resource_6bdn0")
 
-[node name="ScatterShape2" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+[node name="ScatterShape2" type="Node3D" parent="Terrain/Ground/Grass System"]
 transform = Transform3D(40.0998, 0, -20.306, 0, 2.18, 0, 20.306, 0, 40.0998, -0.0456105, -0.0224714, 0.130228)
 script = ExtResource("9_omymh")
 negative = true
 shape = SubResource("Resource_rvcif")
 
-[node name="ScatterShape3" type="Node3D" parent="Exclude/Ground/ProtonScatter"]
+[node name="ScatterShape3" type="Node3D" parent="Terrain/Ground/Grass System"]
 transform = Transform3D(50, 0, -1.49011e-06, 0, 2.425, 0, 1.49011e-06, 0, 50, -4.97321, 0.0154159, 0.594634)
 script = ExtResource("9_omymh")
 negative = true
 shape = SubResource("Resource_xpjyo")
 
-[node name="Meshes" type="Node3D" parent="."]
+[node name="Scene Objects" type="Node3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
-[node name="2" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(0.707107, 0, 0.707107, -0.202379, 0.958168, 0.202379, -0.677527, -0.286207, 0.677527, 5.69655, -1.89236, -6.17501)
-mesh = ExtResource("14_tum05")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("16_vgis7")
+[node name="Rocks" type="Node3D" parent="Scene Objects"]
 
-[node name="4" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("14_tum05")
-skeleton = NodePath("../..")
-
-[node name="5" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(-0.252815, -2.5771, 0.233808, 1.29507e-07, -0.234922, -2.58937, 2.58768, -0.251782, 0.0228425, -0.809909, 1.127, -5.73088)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("15_img4r")
-
-[node name="3" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 8)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("14_tum05")
-
-[node name="Another Pillar" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(1.83848, 0, 1.83848, 0, 2.6, 0, -1.83848, 0, 1.83848, 7.02447, -1.19209e-06, 5.02463)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("15_img4r")
-
-[node name="Well" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(1.441, 0, 0, 0, 1.935, 0, 0, 0, 1.441, 0, 0.103632, 0)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("17_03vwl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(0.965654, 0, -0.25983, 0, 1, 0, 0.25983, 0, 0.965654, -13.7984, 0.123142, -1.61964)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("18_1kbt7")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(0.976251, 0, 0.216644, 0, 1, 0, -0.216644, 0, 0.976251, -23.5392, 0.121907, 4.1762)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("19_q7xwo")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(0.79, 0, 0, 0, 1, 0, 0, 0, 0.79, -30.8488, 0.109624, -1.27007)
-material_override = ExtResource("16_vgis7")
-mesh = ExtResource("20_32n0m")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Scene Objects/Rocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86816, 0, 10.1622)
 material_override = ExtResource("16_vgis7")
 mesh = ExtResource("21_gw4vj")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Scene Objects/Rocks"]
 transform = Transform3D(0.696641, 0, -0.801515, 0, 1.735, 0, 0.933765, 0, 0.597975, -3.0745, 0.258945, -0.324094)
 material_override = ExtResource("16_vgis7")
 mesh = ExtResource("21_gw4vj")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27463, 0)
-visible = false
-mesh = ExtResource("22_guvf3")
-surface_material_override/0 = SubResource("StandardMaterial3D_5aria")
+[node name="SmoothRock2" type="MeshInstance3D" parent="Scene Objects/Rocks"]
+transform = Transform3D(0.603347, 0, 0.797479, 0, 1, 0, -0.797479, 0, 0.603347, 5.78208, 0, 15.8031)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("22_87vor")
+skeleton = NodePath("../../..")
 
-[node name="Animations" type="Node3D" parent="."]
+[node name="Structures" type="Node3D" parent="Scene Objects"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
-root_node = NodePath("../..")
+[node name="2" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(0.707107, 0, 0.707107, -0.202379, 0.958168, 0.202379, -0.677527, -0.286207, 0.677527, 5.69655, -1.89236, -6.17501)
+mesh = ExtResource("14_tum05")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("16_vgis7")
+
+[node name="4" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("14_tum05")
+skeleton = NodePath("../../..")
+
+[node name="5" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(0.0277685, -2.58922, 0.234908, 1.28849e-07, -0.234922, -2.58937, 2.59985, 0.0276542, -0.00250942, -0.809909, 1.127, -5.73088)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("15_img4r")
+skeleton = NodePath("../..")
+
+[node name="3" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 8)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("14_tum05")
+skeleton = NodePath("../..")
+
+[node name="Another Pillar" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(1.83848, 0, 1.83848, 0, 2.6, 0, -1.83848, 0, 1.83848, 7.02447, -1.19209e-06, 5.02463)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("15_img4r")
+skeleton = NodePath("../..")
+
+[node name="Well" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(1.441, 0, 0, 0, 1.935, 0, 0, 0, 1.441, 0, 0.103632, 0)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("17_03vwl")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(0.965654, 0, -0.25983, 0, 1, 0, 0.25983, 0, 0.965654, -13.7984, 0.123142, -1.61964)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("18_1kbt7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(0.976251, 0, 0.216644, 0, 1, 0, -0.216644, 0, 0.976251, -23.5392, 0.121907, 4.1762)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("19_q7xwo")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Scene Objects/Structures"]
+transform = Transform3D(0.79, 0, 0, 0, 1, 0, 0, 0, 0.79, -30.8488, 0.109624, -1.27007)
+material_override = ExtResource("16_vgis7")
+mesh = ExtResource("20_32n0m")
+skeleton = NodePath("../..")
+
+[node name="Foliage" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.22837, 0)
+
+[node name="Leaf Clump" parent="Foliage" instance=ExtResource("29_7fj7j")]
+transform = Transform3D(1, 0, 0, 0, 1.32, 0, 0, 0, 1, 1.44766, 9.53674e-07, -10.4961)
+
+[node name="Leaf Clump2" parent="Foliage" instance=ExtResource("29_7fj7j")]
+transform = Transform3D(-0.0599662, 0, 0.923054, 0, 1.21, 0, -0.923054, 0, -0.0599662, 9.992, 0, 9.13117)
+
+[node name="Bush_Test" parent="Foliage" instance=ExtResource("27_abei4")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.785729, 13.6196)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 770.0
+offset_bottom = 434.0
+
+[node name="Texel_Snapping" type="Control" parent="Control" node_paths=PackedStringArray("viewport")]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("24_3mt34")
+viewport = NodePath("../../Lighting/SubViewport")
+sub_pixel_movement = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Display" type="Sprite2D" parent="Control/Texel_Snapping"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_m1g8e")
+texture = SubResource("ViewportTexture_xlp4f")
+centered = false
+
+[node name="Day_Night Slider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_left = 58.92
+offset_top = 50.81
+offset_right = 226.92
+offset_bottom = 66.81
+min_value = 1.0
+max_value = 30.0
+step = 0.0
+value = 1.0
+script = ExtResource("26_46q4t")
+
+[node name="Animations" type="Node3D" parent="Control/Day_Night Slider"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Day_Night Slider/Animations"]
+unique_name_in_owner = true
+root_node = NodePath("../../../..")
 autoplay = "Sun_Cycle"
 libraries = {
 "": SubResource("AnimationLibrary_as3nl")
 }
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("viewport")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1920.0
-offset_bottom = -1080.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-script = ExtResource("24_3mt34")
-viewport = NodePath("../Lighting/SubViewport")
-sub_pixel_movement = true
-metadata/_edit_use_anchors_ = true
+[node name="Zoom Slider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 111.0
+offset_right = 226.0
+offset_bottom = 127.0
+min_value = 1.0
+max_value = 3.0
+step = 0.01
+value = 1.0
+script = ExtResource("32_qmrc2")
 
-[node name="Display" type="Sprite2D" parent="UI"]
-texture_filter = 2
-material = SubResource("ShaderMaterial_m1g8e")
-texture = SubResource("ViewportTexture_xlp4f")
-centered = false
+[connection signal="mouse_exited" from="Control/Day_Night Slider" to="Control/Day_Night Slider" method="_on_mouse_exited"]
+[connection signal="value_changed" from="Control/Day_Night Slider" to="Control/Day_Night Slider" method="_on_value_changed"]
+[connection signal="value_changed" from="Control/Zoom Slider" to="Control/Zoom Slider" method="_on_value_changed"]

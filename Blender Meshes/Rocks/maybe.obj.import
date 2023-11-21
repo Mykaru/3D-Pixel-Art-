@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://db24vj3pjm14"
+path="res://.godot/imported/maybe.obj-fe02c5b2c21f999f4cb26bb407dcba77.mesh"
+
+[deps]
+
+files=["res://.godot/imported/maybe.obj-fe02c5b2c21f999f4cb26bb407dcba77.mesh"]
+
+source_file="res://Blender Meshes/Rocks/maybe.obj"
+dest_files=["res://.godot/imported/maybe.obj-fe02c5b2c21f999f4cb26bb407dcba77.mesh", "res://.godot/imported/maybe.obj-fe02c5b2c21f999f4cb26bb407dcba77.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

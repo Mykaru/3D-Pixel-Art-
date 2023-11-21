@@ -70,15 +70,16 @@ func _process(delta):
 			is_scrolling = false
 	
 	
-	if Input.is_key_pressed(KEY_W) or UP:
-		self.translate(Vector3(0,0, -SCROLL_SPEED*delta))
+	var direction = Vector3(
+		int(Input.is_key_pressed(KEY_D) or RIGHT) - int(Input.is_key_pressed(KEY_A) or LEFT),
+		0,
+		int(Input.is_key_pressed(KEY_S) or DOWN) - int(Input.is_key_pressed(KEY_W) or UP)
+	)
+	if direction.length_squared() > 0:
+		direction = direction.normalized()
 		
-	if Input.is_key_pressed(KEY_S) or DOWN:
-		self.translate(Vector3(0,0, SCROLL_SPEED*delta))
-		
-	if Input.is_key_pressed(KEY_A) or LEFT:
-		self.translate(Vector3(-SCROLL_SPEED*delta, 0, 0))
-		
-	if Input.is_key_pressed(KEY_D) or RIGHT:
-		self.translate(Vector3(SCROLL_SPEED*delta, 0, 0))
+	self.translate(direction * SCROLL_SPEED * delta)
+	
+	
+	
 

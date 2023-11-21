@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://2emnvd4wvuh1"]
+
+[ext_resource type="Shader" path="res://Leaves.gdshader" id="1_kw613"]
+[ext_resource type="Texture2D" uid="uid://wg2cgp667nnh" path="res://Grass_Alpha.png" id="2_7il4g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mx0jd"]
+render_priority = 0
+shader = ExtResource("1_kw613")
+shader_parameter/leaves_color = Color(0.647059, 1, 0.517647, 1)
+shader_parameter/alpha_mask = ExtResource("2_7il4g")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xp3rs"]
+
+[node name="Leaves" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_mx0jd")
+mesh = SubResource("QuadMesh_xp3rs")

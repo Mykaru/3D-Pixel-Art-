@@ -18,7 +18,8 @@ func _process(_delta):
 
 	size = round(_display.scale * game_size)
 	position = round((screen_size - size) / 2)
-
+	pivot_offset = size/2
+	
 	if pixel_movement:
 		var cam := viewport.get_camera_3d() as Camera3DTexelSnapped
 		var pixel_error: Vector2 = cam.texel_error * _display.scale

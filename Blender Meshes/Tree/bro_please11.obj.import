@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://lousbyg58p2e"
+path="res://.godot/imported/bro_please11.obj-2d267f2a7b4a8f4fd95faff766c73d2e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bro_please11.obj-2d267f2a7b4a8f4fd95faff766c73d2e.mesh"]
+
+source_file="res://Blender Meshes/Tree/bro_please11.obj"
+dest_files=["res://.godot/imported/bro_please11.obj-2d267f2a7b4a8f4fd95faff766c73d2e.mesh", "res://.godot/imported/bro_please11.obj-2d267f2a7b4a8f4fd95faff766c73d2e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

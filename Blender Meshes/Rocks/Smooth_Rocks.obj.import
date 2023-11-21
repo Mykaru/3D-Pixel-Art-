@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dt7briy4na32l"
+path="res://.godot/imported/Smooth_Rocks.obj-7f1851da7762fb069f710635af244761.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Smooth_Rocks.obj-7f1851da7762fb069f710635af244761.mesh"]
+
+source_file="res://Blender Meshes/Rocks/Smooth_Rocks.obj"
+dest_files=["res://.godot/imported/Smooth_Rocks.obj-7f1851da7762fb069f710635af244761.mesh", "res://.godot/imported/Smooth_Rocks.obj-7f1851da7762fb069f710635af244761.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

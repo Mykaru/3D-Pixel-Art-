@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://gsbhc2c3h7l"
+path="res://.godot/imported/maybe_tree.obj-33f0cb6a82079c2a82203efa79024d11.mesh"
+
+[deps]
+
+files=["res://.godot/imported/maybe_tree.obj-33f0cb6a82079c2a82203efa79024d11.mesh"]
+
+source_file="res://Blender Meshes/Tree/maybe_tree.obj"
+dest_files=["res://.godot/imported/maybe_tree.obj-33f0cb6a82079c2a82203efa79024d11.mesh", "res://.godot/imported/maybe_tree.obj-33f0cb6a82079c2a82203efa79024d11.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

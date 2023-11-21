@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl8mo8grd21mm"]
+
+[ext_resource type="ArrayMesh" uid="uid://c02fjkhpe1y1h" path="res://Blender Meshes/Bush/new_bush.obj" id="3_dftqj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40fye"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+
+[node name="Second_Bush" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_40fye")
+mesh = ExtResource("3_dftqj")

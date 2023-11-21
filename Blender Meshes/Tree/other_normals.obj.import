@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d0qi5ac5m72u7"
+path="res://.godot/imported/other_normals.obj-b55bd32848ba62bcd16925d1a15cb45c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/other_normals.obj-b55bd32848ba62bcd16925d1a15cb45c.mesh"]
+
+source_file="res://Blender Meshes/Tree/other_normals.obj"
+dest_files=["res://.godot/imported/other_normals.obj-b55bd32848ba62bcd16925d1a15cb45c.mesh", "res://.godot/imported/other_normals.obj-b55bd32848ba62bcd16925d1a15cb45c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
