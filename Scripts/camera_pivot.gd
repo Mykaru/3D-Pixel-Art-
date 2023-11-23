@@ -10,7 +10,7 @@ var final_rotation = 0
 var rotation_timer = 0
 @export var ROTATION_DURATION = 0.5  # The duration of the rotation in seconds
 @export var rotation_ease = 0.3
-const SCROLL_SPEED = 5;
+const SCROLL_SPEED = 4.5;
 
 #Manual translation
 var UP:bool = false;

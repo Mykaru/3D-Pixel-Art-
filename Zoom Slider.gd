@@ -46,7 +46,7 @@ func reset_zoom():
 	if !is_scrolling:
 		is_scrolling = true
 		initial_zoom = value
-		final_zoom = 1.4
+		final_zoom = 1.5
 		translation_timer = 0
 
 
