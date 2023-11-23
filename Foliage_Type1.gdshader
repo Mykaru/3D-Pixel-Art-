@@ -11,6 +11,7 @@ global uniform float WindSpeed;
 global uniform float WindStrength;
 global uniform float WindDensity;
 uniform bool deactiveGlobalVariation;
+uniform float wind_strength;
 
 
 

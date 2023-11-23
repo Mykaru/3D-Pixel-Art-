@@ -85,6 +85,7 @@ fog_height = 4.0
 fog_height_density = 0.02
 volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
+adjustment_brightness = 0.95
 adjustment_contrast = 1.15
 adjustment_saturation = 1.1
 
@@ -137,7 +138,7 @@ size = Vector2(50, 50)
 subdivide_width = 4000
 subdivide_depth = 1000
 
-[sub_resource type="Resource" id="Resource_85dqv"]
+[sub_resource type="Resource" id="Resource_5nnv1"]
 script = ExtResource("4_gvvn0")
 amount = 70000
 enabled = true
@@ -146,7 +147,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_0y7mc"]
+[sub_resource type="Resource" id="Resource_0aibd"]
 script = ExtResource("5_1tgmp")
 position = Vector3(0, 0, 0)
 rotation = Vector3(0, 90, 0)
@@ -157,7 +158,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_v7fyc"]
+[sub_resource type="Resource" id="Resource_322hu"]
 script = ExtResource("6_iscxu")
 iterations = 3
 offset_step = 0.2
@@ -169,7 +170,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_yiy7l"]
+[sub_resource type="Resource" id="Resource_8ymfl"]
 script = ExtResource("7_xrn54")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 5.0
@@ -185,9 +186,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_6ghqs"]
+[sub_resource type="Resource" id="Resource_thlfi"]
 script = ExtResource("3_pxbow")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_85dqv"), SubResource("Resource_0y7mc"), SubResource("Resource_v7fyc"), SubResource("Resource_yiy7l")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_5nnv1"), SubResource("Resource_0aibd"), SubResource("Resource_322hu"), SubResource("Resource_8ymfl")])
 
 [sub_resource type="Resource" id="Resource_6bdn0"]
 script = ExtResource("9_qtcqs")
@@ -218,12 +219,6 @@ script = ExtResource("13_t81y3")
 closed = true
 thickness = 0.0
 curve = SubResource("Curve3D_vcvpj")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1g8e"]
-shader = ExtResource("23_pytq3")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_xlp4f"]
-viewport_path = NodePath("Lighting/SubViewport")
 
 [sub_resource type="Animation" id="Animation_4s7wc"]
 length = 0.001
@@ -290,7 +285,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_rocya"]
 resource_name = "Sun_Cycle"
-length = 30.0
+length = 60.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -299,7 +294,7 @@ tracks/0/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3, 7.5, 22.5, 27, 30),
+"times": PackedFloat32Array(0, 6, 15, 45, 54, 60),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.65, 0.65, 0.0, 0.0, 0.65, 0.65]
@@ -311,7 +306,7 @@ tracks/1/path = NodePath("Lighting/Sun_Pivot:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 30),
+"times": PackedFloat32Array(0, 60),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -6.28319)]
@@ -323,7 +318,7 @@ tracks/2/path = NodePath("Lighting/WorldEnvironment:environment:ambient_light_sk
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(7.5, 15, 22.5),
+"times": PackedFloat32Array(15, 30, 45),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.85, 0.85, 0.85]
@@ -335,7 +330,7 @@ tracks/3/path = NodePath("Lighting/Oscillator/OmniLight3D:light_energy")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 7.5, 9, 21, 22.5, 30),
+"times": PackedFloat32Array(0, 15, 18, 42, 45, 60),
 "transitions": PackedFloat32Array(1, 0.185, 1, 0.185, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 1.0, 1.0, 0.0, 0.0]
@@ -347,7 +342,7 @@ tracks/4/path = NodePath("Lighting/Oscillator/Orb:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(7.5, 9, 21, 22.5),
+"times": PackedFloat32Array(15, 18, 42, 45),
 "transitions": PackedFloat32Array(0.185, 1, 0.185, 1),
 "update": 0,
 "values": [Vector3(0, 0.8, 0), Vector3(0, 1.55, 0), Vector3(0, 1.55, 0), Vector3(0, 0.8, 0)]
@@ -359,7 +354,7 @@ tracks/5/path = NodePath("Lighting/Oscillator/OmniLight3D:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 7.5, 9, 21, 22.5, 30),
+"times": PackedFloat32Array(0, 15, 18, 42, 45, 60),
 "transitions": PackedFloat32Array(1, 0.185, 1, 0.185, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0.8, 0), Vector3(0, 0.8, 0), Vector3(0, 1.55, 0), Vector3(0, 1.55, 0), Vector3(0, 0.8, 0), Vector3(0, 0.8, 0)]
@@ -371,7 +366,7 @@ tracks/6/path = NodePath("Lighting/Oscillator/Orb:surface_material_override/0:em
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 7.5, 9, 21, 22.5, 30),
+"times": PackedFloat32Array(0, 15, 18, 42, 45, 60),
 "transitions": PackedFloat32Array(1, 0.185, 1, 0.185, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 0.5, 0.5, 0.0, 0.0]
@@ -383,7 +378,7 @@ tracks/7/path = NodePath("Lighting/Sun_Pivot/DirectionalLight3D:light_color")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(3, 5, 22.5, 27),
+"times": PackedFloat32Array(6, 10, 45, 54),
 "transitions": PackedFloat32Array(1, 1, 0.277393, 1),
 "update": 0,
 "values": [Color(0.941176, 1, 0.882353, 1), Color(1, 0.803922, 0.423529, 1), Color(1, 0.803922, 0.423529, 1), Color(0.941176, 1, 0.882353, 1)]
@@ -394,6 +389,12 @@ _data = {
 "RESET": SubResource("Animation_4s7wc"),
 "Sun_Cycle": SubResource("Animation_rocya")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1g8e"]
+shader = ExtResource("23_pytq3")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xlp4f"]
+viewport_path = NodePath("Lighting/SubViewport")
 
 [node name="Main" type="Node3D"]
 
@@ -422,13 +423,13 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 remote_path = NodePath("../../SubViewport/Camera3D")
 
 [node name="SubViewport" type="SubViewport" parent="Lighting"]
-size = Vector2i(770, 434)
+size = Vector2i(962, 542)
 
 [node name="Camera3D" type="Camera3D" parent="Lighting/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14, 14)
 projection = 1
 fov = 26.7
-size = 12.0
+size = 16.0
 near = 0.001
 far = 298.36
 script = ExtResource("3_sqlkg")
@@ -459,7 +460,7 @@ skeleton = NodePath("../..")
 
 [node name="Grass System" type="Node3D" parent="Terrain/Ground"]
 script = ExtResource("2_pdq8u")
-modifier_stack = SubResource("Resource_6ghqs")
+modifier_stack = SubResource("Resource_thlfi")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -503,7 +504,7 @@ mesh = ExtResource("21_gw4vj")
 skeleton = NodePath("../..")
 
 [node name="SmoothRock2" type="MeshInstance3D" parent="Scene Objects/Rocks"]
-transform = Transform3D(0.603347, 0, 0.797479, 0, 1, 0, -0.797479, 0, 0.603347, 5.78208, 0, 15.8031)
+transform = Transform3D(0.602427, 0, 0.796263, 0, 0.998475, 0, -0.796263, 0, 0.602427, 5.78208, 0, 15.8031)
 material_override = ExtResource("16_vgis7")
 mesh = ExtResource("22_87vor")
 skeleton = NodePath("../../..")
@@ -576,6 +577,18 @@ transform = Transform3D(-0.0599662, 0, 0.923054, 0, 1.21, 0, -0.923054, 0, -0.05
 [node name="Bush_Test" parent="Foliage" instance=ExtResource("27_abei4")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.785729, 13.6196)
 
+[node name="Animations" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(960, 0, 0, 0, 540, 0, 0, 0, 960, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+autoplay = "Sun_Cycle"
+libraries = {
+"": SubResource("AnimationLibrary_as3nl")
+}
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -608,16 +621,6 @@ step = 0.0
 value = 1.0
 script = ExtResource("26_46q4t")
 
-[node name="Animations" type="Node3D" parent="Control/Day_Night Slider"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Day_Night Slider/Animations"]
-unique_name_in_owner = true
-root_node = NodePath("../../../..")
-autoplay = "Sun_Cycle"
-libraries = {
-"": SubResource("AnimationLibrary_as3nl")
-}
-
 [node name="Zoom Slider" type="HSlider" parent="Control"]
 layout_mode = 0
 offset_left = 59.0
@@ -625,7 +628,7 @@ offset_top = 111.0
 offset_right = 226.0
 offset_bottom = 127.0
 min_value = 1.0
-max_value = 3.0
+max_value = 5.0
 step = 0.01
 value = 1.0
 script = ExtResource("32_qmrc2")

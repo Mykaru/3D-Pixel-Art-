@@ -1,13 +1,13 @@
 extends HSlider
 
-var animation_player: AnimationPlayer
 var is_paused: bool = false
 var paused_position: float = 0.0
 var anim_name: String = "Sun_Cycle"
+@onready var animation_player = get_node("/root/Main/Animations/AnimationPlayer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	animation_player = $Animations/AnimationPlayer
+	pass
 
 func _input(event):
 	if event.is_action_pressed("play_anim"):

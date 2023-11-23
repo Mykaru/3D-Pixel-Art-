@@ -12,6 +12,7 @@ shader = ExtResource("1_4jqhj")
 shader_parameter/leavesColor = Color(0.494118, 0.72549, 0.392157, 1)
 shader_parameter/alphaThreshold = 0.7
 shader_parameter/deactiveGlobalVariation = true
+shader_parameter/wind_strength = null
 shader_parameter/alphaTexture = ExtResource("2_tjper")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_geugy"]
